@@ -25,7 +25,7 @@ SECRET_KEY = 'cc=(4fwj^7e37fbbw3sl5z#%7o4$($@0zrs*4o3vp30!3f*4km'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','django-disqus.herokuapp']
 
 
 # Application definition

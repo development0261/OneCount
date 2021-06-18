@@ -46,7 +46,7 @@ def check_sso(request):
         this.page.api_key = "%(pub_key)s";
         this.page.url = '';
         this.sso = {
-        name:   "Django Disqus",
+        name:   "OneCount",
         
         url:     "http://localhost:8000/register",
         logout:  "http://www.screener.in/logout/",

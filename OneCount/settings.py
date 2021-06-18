@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'OneCount',
     'django.contrib.sites',
-    'disqus',
+
 ]
 
 SITE_ID =1

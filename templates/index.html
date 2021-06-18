@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check SSo</title>
+</head>
+<body>
+
+
+Hello
+
+<div id="disqus_thread"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    $.get("/check_sso", function(data, status){
+    data = JSON.parse(data)
+      $("body").append(data.sso);
+    });
+
+});
+</script>
+
+
+
+</body>
+</html>

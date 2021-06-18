@@ -70,7 +70,7 @@ def registration(request):
         if form.is_valid():
             form.save()
     form = MyRegister()
-    return render(request,'signup.html',{'form':form})
+    return render(request,'SignUp.html',{'form':form})
 
 def loginprocess(request):
     if request.method == "POST":

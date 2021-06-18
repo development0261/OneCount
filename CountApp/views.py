@@ -10,8 +10,8 @@ def index(request):
 
 def check_sso(request):
 
-    DISQUS_SECRET_KEY = 'sV40p5ZCNesXC14qjtleBkHSjcBVc9ALAFdGUvjWNuxrUejP9hwUvVxvB1XKXbM1'
-    DISQUS_PUBLIC_KEY = 'Y0GFE8flXjkbeQvknIfnWLlxU72KFyyOQlKmwE2UJp6Z3RgIXBbWMzDd1HnVyyVB'
+    DISQUS_SECRET_KEY = 'saS4ySxgxB3u8H0u4y8DVBgqRwB5AE0sKafxS3z2pk3v0KJHEFNmf7O5X6h5aRak'
+    DISQUS_PUBLIC_KEY = 'HwMMeRJh7M0sEUvQTKc9WD1y7XxZUA4Ft9ITOATNOxnZrQ5JmsZ3EZfxRwViiHaA'
 
     import base64
     import hashlib

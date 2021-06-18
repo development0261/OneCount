@@ -38,7 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'OneCount',
+    'django.contrib.sites',
+    'disqus',
 ]
+
+SITE_ID =1
+DISQUS_API_KEY = 'HwMMeRJh7M0sEUvQTKc9WD1y7XxZUA4Ft9ITOATNOxnZrQ5JmsZ3EZfxRwViiHaA'
+DISQUS_WEBSITE_SHORTNAME = 'foobar'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

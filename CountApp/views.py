@@ -48,7 +48,7 @@ def check_sso(request):
         this.sso = {
         name:   "OneCount",
         
-        url:     "http://localhost:8000/register",
+        url:     "https://django-disqus.herokuapp.com/register",
         logout:  "http://www.screener.in/logout/",
         };
     }

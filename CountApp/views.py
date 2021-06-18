@@ -58,6 +58,7 @@ def check_sso(request):
             sig=sig,
             pub_key=DISQUS_PUBLIC_KEY
         )
+
     print(request.user)
 
     sso = get_sso_auth(request.user)

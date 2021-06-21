@@ -28,7 +28,9 @@ def check_sso(request):
                 'username': user.username,
                 'email': user.email,
             })
+            print(data)
         else:
+
             # sending empty json object logs out
             data = json.dumps({})
 
@@ -58,8 +60,9 @@ def check_sso(request):
             pub_key=DISQUS_PUBLIC_KEY
         )
 
-
-    if request.user:
+    sso = None
+    if request.user.is_authenticated:
+        print(request.user)
         sso = get_sso_auth(request.user)
     return render(request, "check_sso.html", {"disqus_sso": sso})
 

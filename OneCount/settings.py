@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+from django.contrib.messages import constants as message
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -110,7 +110,13 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
+MESSAGE_TAGS = {
+    message.DEBUG: 'alert-info',
+    message.INFO: 'alert-info',
+    message.SUCCESS: 'alert-success',
+    message.WARNING: 'alert-warning',
+    message.ERROR: 'alert-danger',
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

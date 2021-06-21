@@ -1,30 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>OneCount Login</title>
-</head>
-<body>
+{% extends 'basic.html' %}
 
-{{ request.session.userData }}
-<a href="{% url 'loginprocess'  %}"> Go For Login </a>
-<a href="{% url 'registration'  %}"> Go For SignUp </a>
+{% block content %}
 
-<div id="disqus_thread"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="container p-3">
+{% for message in messages %}
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+
+<a class="btn btn-outline-success " href="{% url 'registration'  %}"> Go For SignUp </a>
+{% if request.session.user %}
+    <a class="btn btn-outline-danger " href="{% url 'logoutprocess'  %}"> Go For Logout </a>
+{% else %}
+    <a class="btn btn-outline-info " href="{% url 'loginprocess'  %}"> Go For Login </a>
+{% endif %}
+</div>
+
+
+{% endblock %}
+
+{% block scripts %}
 <script>
-$(document).ready(function(){
-
-    $.get("/check_sso", function(data, status){
-    data = JSON.parse(data)
-      $("body").append(data.sso);
-    });
-
-});
-</script>
 
 
+{% endblock %}
 
-</body>
-</html>

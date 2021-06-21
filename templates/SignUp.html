@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SignUp</title>
-</head>
-<body>
+{% extends 'basic.html' %}
 
-{% if msg %}
-    {{ msg }}
-{%  endif %}
- <form method="post" action="">{% csrf_token %}
-     <h3>
-         UserName:
-     </h3>
-     <input type="text" placeholder="Enter Username" name="username">
-
-      <h3>
-         Email:
-     </h3>
-     <input type="email" placeholder="Enter Email" name="email">
-
-      <h3>
-         Password:
-     </h3>
-     <input type="password" placeholder="Enter Password" name="password">
-
-     <br/>
-     <br/>
+{% block content %}
 
 
-     <input type="submit" value="Register">
+  <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6 col-lg-6">
 
- </form>
+                <h2>OneCount Registration</h2>
+                {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                 <form method="post" action="">{% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
 
-<a href="{% url 'loginprocess' %}">Go For Login </a>
-</body>
-</html>
+                      </div>
+                       <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+
+                     <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" name="cpassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+
+                      <button type="submit" class="btn btn-primary">Register</button>
+                       <a class="btn btn-outline-secondary " href="{% url 'loginprocess' %}">Go For Login </a>
+                </form>
+
+            </div>
+        </div>
+  </div>
+
+
+
+
+
+{% endblock %}

@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Check SSo</title>
+    <title>OneCount Login</title>
 </head>
 <body>
 
-
-Hello
+{{ request.session.userData }}
+<a href="{% url 'loginprocess'  %}"> Go For Login </a>
+<a href="{% url 'registration'  %}"> Go For SignUp </a>
 
 <div id="disqus_thread"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

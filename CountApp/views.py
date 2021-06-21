@@ -1,11 +1,11 @@
 import json
-
+import requests
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import login,logout,authenticate
 from .forms import MyRegister,LoginForm
+import requests
 # Create your views here.
 def index(request):
-
     return render(request,'index.html')
 
 def check_sso(request):
@@ -48,7 +48,7 @@ def check_sso(request):
         this.sso = {
         name:   "OneCount",
         
-        url:     "https://django-disqus.herokuapp.com/register",
+        url:     "http://127.0.0.1:8000/loginprocess",
         logout:  "http://www.screener.in/logout/",
         };
     }
@@ -59,35 +59,83 @@ def check_sso(request):
             pub_key=DISQUS_PUBLIC_KEY
         )
 
-    print(request.user)
 
-    sso = get_sso_auth(request.user)
+    if request.user:
+        sso = get_sso_auth(request.user)
     return render(request, "check_sso.html", {"disqus_sso": sso})
 
 
 def registration(request):
-    if request.method == "POST":
-        form = MyRegister(request.POST)
-        if form.is_valid():
-            form.save()
-    form = MyRegister()
-    return render(request,'SignUp.html',{'form':form})
-
-def loginprocess(request):
+    msg = None
     if request.method == "POST":
         username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
 
-        user = authenticate(username=username,password=password)
-        if user:
-            login(request,user)
-        return redirect("Home")
+        json_data = {
+            "Users":
+                {
+                    "PartnerId": 0,
+                    "Demo": {
+                        "1": email,
+                        "2": username,
+                        "3": password,
 
-    return render(request, 'login.html')
+                    }
+
+                },
+            "DedupeColumns": "1",
+
+            "Transactions": [],
+
+            "Return": "1"
+        }
+        response = requests.post('https://api.onecount.net/v2/users', json=json_data,headers={"Appkey":"a6de8a39b2ad34a5f6dc947021ea02c1025bfd3e"})
+
+        print("Status code: ", response.status_code)
+        print("Printing Entire Post Request")
+
+        if response.json()['result']['success'] == 1:
+            msg = " Successfully Registered "
+            print(response.json()['Users'][0])
+
+            return redirect("loginprocess")
+
+    return render(request,'SignUp.html',{'msg':msg})
+
+def loginprocess(request):
+    if 'user' not in request.session:
+        msg = None
+        if request.method == "POST":
+
+                email = request.POST['email']
+                password = request.POST['password']
+
+                json_data = {
+                    "e": email, "p": password
+                }
+                response = requests.post('https://api.onecount.net/v2/users/login', json=json_data,
+                                         headers={"Appkey": "a6de8a39b2ad34a5f6dc947021ea02c1025bfd3e"})
+
+                print(response.json())
+                if response.json()['result']['success'] == '1':
+                    msg = " Successfully Logged In "
+                    u_id = response.json()['Users'][0]
+                    response = requests.get('https://api.onecount.net/v2/users/'+str(u_id),
+                                             headers={"Appkey": "a6de8a39b2ad34a5f6dc947021ea02c1025bfd3e"})
+                    request.session['user'] = response.json()['Users'][0]['OCID_HASH']
+                    request.session['userData'] = response.json()['Users'][0]['Demo']['1']
+                    return redirect("Home")
+
+        return render(request, 'login.html',{'msg':msg})
+    else:
+        return redirect("Home")
 
 def logoutprocess(request):
     if request.user:
-        logout(request)
+        if 'user' in request.session:
+            del request.session['user']
+            del request.session['userData']
         return redirect("Home")
 
 

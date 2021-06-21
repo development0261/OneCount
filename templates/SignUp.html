@@ -5,11 +5,33 @@
     <title>SignUp</title>
 </head>
 <body>
-    <form action="" method="post"> {% csrf_token%}
-        {{form.as_p}}
-        <input type="submit" value="Submit">
-    </form>
 
+{% if msg %}
+    {{ msg }}
+{%  endif %}
+ <form method="post" action="">{% csrf_token %}
+     <h3>
+         UserName:
+     </h3>
+     <input type="text" placeholder="Enter Username" name="username">
+
+      <h3>
+         Email:
+     </h3>
+     <input type="email" placeholder="Enter Email" name="email">
+
+      <h3>
+         Password:
+     </h3>
+     <input type="password" placeholder="Enter Password" name="password">
+
+     <br/>
+     <br/>
+
+
+     <input type="submit" value="Register">
+
+ </form>
 
 <a href="{% url 'loginprocess' %}">Go For Login </a>
 </body>

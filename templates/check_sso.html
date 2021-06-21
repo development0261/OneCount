@@ -22,14 +22,14 @@
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
 
     var disqus_config = function () {
-     this.page.url = 'http://127.0.0.1:8000/check_sso/'; // Replace PAGE_URL with your page's canonical URL variable
+     this.page.url = 'https://django-disqus.herokuapp.com/check_sso/'; // Replace PAGE_URL with your page's canonical URL variable
                             // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 
                               this.sso = {
                         name:   "OneCount",
 
-                        url:     "http://localhost:8000/loginprocess/",
-                        logout:  "http://www.screener.in/logout/",
+                        url:     "https://django-disqus.herokuapp.com/loginprocess/",
+                        logout:  "https://django-disqus.herokuapp.com/logoutprocess/",
                         };
                         };
 
